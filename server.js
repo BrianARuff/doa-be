@@ -123,7 +123,7 @@ server.get("/api/quiz/:quizId", (req, res) => {
     db("celebQuiz")
         .innerJoin("celebrity", "celebrity.id", "celebQuiz.celeb_id")
         .where("celebQuiz.quiz_id", quizId)
-        .then(celebData => res.status(200).json(celebData))
+        .then(celebData => res.status(200).json(celebData.rows))
         .catch(err =>
             res
                 .status(500)
