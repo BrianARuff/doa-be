@@ -140,7 +140,7 @@ server.get("/api/quizzes", (req, res) => {
     db.select()
         .table("quiz")
         .then(allQuizzes => {
-            res.status(200).json(allQuizzes);
+            res.status(200).json(allQuizzes.rows);
         })
         .catch(error =>
             res
@@ -159,7 +159,7 @@ server.post("/api/quiz/:id", authentication, (req, res) => {
         db("celebQuiz")
             .insert({ celeb_id: item, quiz_id: req.params.id })
             .then(response => {
-                res.status(201).json(response);
+                res.status(201).json(response.rows);
             })
             .catch(error => {
                 res.status(400).json({ message: "Cannot add quiz elements" });
