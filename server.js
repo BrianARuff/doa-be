@@ -123,7 +123,7 @@ server.get("/api/quiz/:quizId", (req, res) => {
     db("celebQuiz")
         .innerJoin("celebrity", "celebrity.id", "celebQuiz.celeb_id")
         .where("celebQuiz.quiz_id", quizId)
-        .then(celebData => res.status(200).json(celebData.rows))
+        .then(celebData => res.status(200).json(celebData))
         .catch(err =>
             res
                 .status(500)
@@ -140,7 +140,7 @@ server.get("/api/quizzes", (req, res) => {
     db.select()
         .table("quiz")
         .then(allQuizzes => {
-            res.status(200).json(allQuizzes.rows);
+            res.status(200).json(allQuizzes);
         })
         .catch(error =>
             res
@@ -159,7 +159,7 @@ server.post("/api/quiz/:id", authentication, (req, res) => {
         db("celebQuiz")
             .insert({ celeb_id: item, quiz_id: req.params.id })
             .then(response => {
-                res.status(201).json(response.rows);
+                res.status(201).json(response);
             })
             .catch(error => {
                 res.status(400).json({ message: "Cannot add quiz elements" });
@@ -197,7 +197,7 @@ server.get("/api/celebrity/:id", (req, res) => {
     const celebId = req.params.id;
     db("celebrity")
         .where({ id: celebId })
-        .then(data => res.status(200).json(data.rows))
+        .then(data => res.status(200).json(data))
         .catch(err => status(500).json({ err }));
 });
 
