@@ -197,7 +197,7 @@ server.get("/api/celebrity/:id", (req, res) => {
     const celebId = req.params.id;
     db("celebrity")
         .where({ id: celebId })
-        .then(data => res.status(200).json(data))
+        .then(data => res.status(200).json(data.rows))
         .catch(err => status(500).json({ err }));
 });
 
